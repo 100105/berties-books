@@ -12,13 +12,14 @@ router.get('/register', function (req, res, next) {
 router.post('/registered', function (req, res, next) {
     
     const plainPassword = req.body.password
+
     bcrypt.hash(plainPassword, saltRounds, function(err, hashedPassword) {
         if (err) {
             return next(err)
         }
         
-        let sqlquery="INSERT INTO users (username, first, last, email, hashedPassword) VALUES (?,?,?,?,?)"
-        let newrecord= [
+        let sqlquery = "INSERT INTO users (username, first, last, email, hashedPassword) VALUES (?,?,?,?,?)"
+        let newrecord = [
             req.body.username,
             req.body.first,
             req.body.last,
@@ -26,17 +27,23 @@ router.post('/registered', function (req, res, next) {
             hashedPassword
         ]
 
-        db.query(sqlquery, newrecord, (err,result) =>{
+        db.query(sqlquery, newrecord, (err, result) => {
             if (err) {
                 next(err)
-            } else{
-                let resultMessage = 'Hello' + req.body.first + '' + req.body.last + ',you are now registered! We will send an email to you at ' + req.body.email + '<br>'
+            } else {
+                let resultMessage = 
+                    'Hello ' + req.body.first + ' ' + req.body.last +
+                    ', you are now registered! We will send an email to you at ' + req.body.email + '<br>'
 
-                resultMessage += 'Your password is ' + req.body.password + '<br>' + 'your hashed password is: ' + hashedPassword
-                res.send(resultMessage);                                                                              
+                resultMessage += 
+                    'Your password is: ' + req.body.password + '<br>' +
+                    'Your hashed password is: ' + hashedPassword
+
+                res.send(resultMessage)
             }
         })
-}); 
-}
-// Export the router object so index.js can access it
+    })  // closes bcrypt.hash
+})      // closes router.post
+
+// Export the router object so index.j
 module.exports = router
