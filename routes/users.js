@@ -59,6 +59,9 @@ router.get('/list', function (req, res, next) {
     });
 });
 
+router.get('/login', function(req, res, next) {
+    res.render("login.ejs")
+})
 router.post('/loggedin', function(req, res, next) {
 
     let username = req.body.username
