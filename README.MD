@@ -6,6 +6,13 @@ This project is labwork for Dynamic web applications module that uses node.js wi
 ## How to Run
 1. npm install
 2. node index.js
+
+how to run on vm
+1. npm install
+2. npm install bcrypt
+3. git pull
+4. forever stopall
+5. forever start index.js
 ---
 
 ### Technologies Used
