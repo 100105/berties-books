@@ -1,6 +1,7 @@
 # Berties Books
 
 This project is labwork for Dynamic web applications module that uses node.js with Express, EJS and MySQL database.
+
 ---
 
 ## How to Run
