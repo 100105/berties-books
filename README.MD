@@ -36,6 +36,7 @@ we did this becayse it improves security by making sure passwords weren't being 
 the .env file was put into .gitignore but you can still mark it because i used the variables you shared 
 
 the .env used are loaded in index.js in the require dotenv line
+
 ---
 
 ##### Author
