@@ -92,7 +92,8 @@ router.post(
                 }
 
                 res.send(
-                    `Hello ${req.body.first} ${req.body.last}, you are now registered!`
+                    "Hello " + req.body.first + " " + req.body.last + ", you are now registered!<br>We will send an email to you at: " 
+                    + req.body.email
                 );
             });
         });
