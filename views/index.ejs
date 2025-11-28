@@ -2,71 +2,70 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Bertie’s Bookshop</title>
+  <title>Home - Bertie’s Bookshop</title>
   <style>
     body {
       font-family: "Poppins", Arial, sans-serif;
       background-color: #f9f5f2;
       margin: 0;
       padding: 0;
-      color: #f9f5f2;
       text-align: center;
+      color: #4a3f35;
     }
 
     header {
       background-color: #d9b8a3;
       color: white;
       padding: 25px;
-      text-align: center;
       letter-spacing: 1px;
     }
 
     h1 {
       margin: 0;
-      font-size: 30px;
+      font-size: 32px;
     }
 
-    h2 {
-      margin-top: 40px;
-      font-size: 22px;
-      color: #a07c68;
+    .nav-links {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
     }
 
-    a.button {
-      display: inline-block;
-      margin: 15px;
-      padding: 12px 18px;
+    a {
+      color: #4a3f35;
+      font-weight: bold;
+      text-decoration: none;
+      background-color: #e9d4c7;
+      padding: 10px 16px;
+      border-radius: 6px;
+    }
+
+    a:hover {
       background-color: #d9b8a3;
       color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: 500;
-      border: none;
     }
-
-    a.button:hover {
-      opacity: 0.8;
-    }
-
   </style>
 </head>
 
 <body>
   <header>
-    <h1>Bertie’s Bookshop</h1>
+    <h1>Welcome to Bertie’s Bookshop</h1>
   </header>
 
-  <h2>Welcome to the Bookshop!</h2>
+  <div class="nav-links">
+    <a href="/about">About</a>
+    <a href="/books/search">Search Books</a>
 
-  <% if (!isLoggedIn) { %>
-    <a href="/users/login" class="button">Login</a>
-    <a href="/users/register" class="button">Register</a>
-  <% } else { %>
-    <a href="/books/list" class="button">Book List</a>
-    <a href="/books/bargainbooks" class="button">Bargain Books</a>
-    <a href="/users/audit" class="button">Audit Log</a>
-    <a href="/logout" class="button">Logout</a>
-  <% } %>
-
+    <% if (isLoggedIn) { %>
+      <a href="/books/addbook">Add Book</a>
+      <a href="/books/list">List All Books</a>
+      <a href="/users/audit">Audit Log</a>
+      <a href="/logout">Logout</a>
+    <% } else { %>
+      <a href="/users/login">Login</a>
+      <a href="/users/register">Register</a>
+    <% } %>
+  </div>
 </body>
 </html>
