@@ -1,22 +1,72 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>Welcome to <%= shopData.shopName %></title>
-    <link rel="stylesheet" type="text/css" href="/main.css" />
-  </head>
-  <body>
-    <h1>Welcome to <%= shopData.shopName %></h1>
+<head>
+  <meta charset="UTF-8">
+  <title>Bertie’s Bookshop</title>
+  <style>
+    body {
+      font-family: "Poppins", Arial, sans-serif;
+      background-color: #f9f5f2;
+      margin: 0;
+      padding: 0;
+      color: #f9f5f2;
+      text-align: center;
+    }
 
-    <p><a href="/about">About <%= shopData.shopName %></a></p>
-    <p><a href="/books/search">Search for books</a></p>
+    header {
+      background-color: #d9b8a3;
+      color: white;
+      padding: 25px;
+      text-align: center;
+      letter-spacing: 1px;
+    }
 
-    <% if (!isLoggedIn) { %>
-      <p><a href="/users/register">Register with us</a></p>
-      <p><a href="/users/login">Login</a></p>
-    <% } else { %>
-      <p><a href="/users/list">View user list</a></p>
-      <p><a href="/books/list">View books</a></p>
-      <p><a href="/logout">Logout</a></p>
-    <% } %>
-  </body>
+    h1 {
+      margin: 0;
+      font-size: 30px;
+    }
+
+    h2 {
+      margin-top: 40px;
+      font-size: 22px;
+      color: #a07c68;
+    }
+
+    a.button {
+      display: inline-block;
+      margin: 15px;
+      padding: 12px 18px;
+      background-color: #d9b8a3;
+      color: white;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: 500;
+      border: none;
+    }
+
+    a.button:hover {
+      opacity: 0.8;
+    }
+
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Bertie’s Bookshop</h1>
+  </header>
+
+  <h2>Welcome to the Bookshop!</h2>
+
+  <% if (!isLoggedIn) { %>
+    <a href="/users/login" class="button">Login</a>
+    <a href="/users/register" class="button">Register</a>
+  <% } else { %>
+    <a href="/books/list" class="button">Book List</a>
+    <a href="/books/bargainbooks" class="button">Bargain Books</a>
+    <a href="/users/audit" class="button">Audit Log</a>
+    <a href="/logout" class="button">Logout</a>
+  <% } %>
+
+</body>
 </html>
