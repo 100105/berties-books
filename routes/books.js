@@ -2,14 +2,13 @@
 const express = require("express")
 const router = express.Router()
 
-// Lecturer-required redirect function
+// Get redirect function from app.locals
 const redirectLogin = (req, res, next) => {
-    if (!req.session.userId ) {
-      res.redirect('./login') // redirect to the login page
-    } else { 
-        next (); // move to the next middleware function
-    } 
-}
+    if (!req.session || !req.session.userId) {
+        return res.redirect('../users/login'); // Correct redirect path
+    }
+    next();
+};
 
 // Search page - always accessible
 router.get('/search', function(req, res, next){
