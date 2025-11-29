@@ -14,7 +14,7 @@ const redirectLogin = (req, res, next) => {
     }
 };
 
-// REGISTER 
+// register 
 router.get('/register', function (req, res) {
     res.render("register.ejs", { 
         errors: [], 
@@ -22,7 +22,7 @@ router.get('/register', function (req, res) {
     });
 });
 
-// REGISTER 
+// regitered 
 router.post(
     '/registered',
     [
@@ -102,7 +102,7 @@ router.post(
     }
 );
 
-// USERS 
+// users 
 router.get('/list', redirectLogin, function (req, res, next) {
     let sqlquery = "SELECT username, first, last, email FROM users";
     db.query(sqlquery, (err, result) => {
@@ -111,12 +111,12 @@ router.get('/list', redirectLogin, function (req, res, next) {
     });
 });
 
-// LOGIN 
+// login 
 router.get('/login', function (req, res) {
     res.render("login.ejs");
 });
 
-// LOGIN , audit
+// login , audit
 router.post('/loggedin', function (req, res, next) {
     let username = req.sanitize(req.body.username);
     let suppliedPassword = req.body.password;
@@ -173,7 +173,7 @@ router.post('/loggedin', function (req, res, next) {
     });
 });
 
-// AUDIT 
+// audit 
 router.get('/audit', redirectLogin, function (req, res, next) {
     db.query("SELECT * FROM login_audit ORDER BY login_time DESC", (err, result) => {
         if (err) return next(err);

@@ -11,7 +11,7 @@ const expressSanitizer = require('express-sanitizer');
 const app = express()
 const port = 8000
 
-// Tell Express that we want to use EJS as the templating engine
+// Tell Express that we want to use EJS as the engine
 app.set('view engine', 'ejs')
 
 // Set up the body parser 
@@ -20,10 +20,10 @@ app.use(express.urlencoded({ extended: true }))
 // Create an input sanitizer
 app.use(expressSanitizer());
 
-// Set up public folder (for css and static js)
+// Set up public folder 
 app.use(express.static(path.join(__dirname, 'public')))
 
-// Create a session
+// Creatse session
 app.use(session({
     secret: 'somerandomstuff',
     resave: false,
@@ -49,7 +49,6 @@ const redirectLogin = (req, res, next) => {
 
 app.locals.redirectLogin = redirectLogin
 
-// Define the database connection pool
 const db = mysql.createPool({
     host: 'localhost',
     user: process.env.BB_USER,        
@@ -61,7 +60,6 @@ const db = mysql.createPool({
 });
 global.db = db;
 
-// Define our application-specific data
 app.locals.shopData = {shopName: "Bertie's Books"}
 
 // Load the route handlers

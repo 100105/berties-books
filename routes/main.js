@@ -4,7 +4,6 @@ const router = express.Router()
 
 const redirectLogin = (req, res, next) => {
     if (!req.session || !req.session.userId) {
-      // not logged in, send them to login page
       return res.redirect("./users/login");
     }
     next();

@@ -19,7 +19,7 @@ h1 {
   font-size: 30px;
 }
 
-/* Form styling */
+/* style for form */
 form {
   margin-left: 60px;
   margin-top: 30px;
@@ -51,7 +51,7 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-/* Table styling (users + books pages) */
+/* style for table*/
 table {
   border-collapse: collapse;
   width: 70%;
@@ -69,7 +69,7 @@ th {
   font-weight: 600;
 }
 
-/* Navigation links */
+/* navigation links */
 nav {
   margin-top: 10px;
 }
