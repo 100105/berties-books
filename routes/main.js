@@ -23,7 +23,7 @@ router.get('/about',function(req, res, next){
 //just checking if this commit works
 
 //weather route
-router.get('/weather', function (req, res, next) {
+router.get('/weather/now', function (req, res, next) {
 
   let apiKey = '0fcf6ff21b366aea30bcb1cdb8bbfd2e'; // <-- put YOUR key here
   let city = 'london';
