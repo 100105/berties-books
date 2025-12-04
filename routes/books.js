@@ -15,9 +15,11 @@ router.get('/search', function(req, res, next){
     res.render("search.ejs")
 });
 
-// Search results - always accessible
 router.get('/search-result', function (req, res, next) {
-    res.send("You searched for: " + req.query.keyword)
+    console.log("QUERY RECEIVED:", req.query);
+    const keyword = req.query.keyword || "(no keyword entered)";
+    
+    res.render("search_result.ejs", { keyword: keyword });
 });
 
 // Book list - PUBLIC (no login required)
