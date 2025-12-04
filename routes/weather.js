@@ -112,7 +112,6 @@ router.post('/', function (req, res, next) {
                 <body>
                     <header><h1>Bertie’s Bookshop</h1></header>
                     <h2>Please enter an existing city</h2>
-                    <p>Please try another one!</p>
                     <a class="btn" href="/weather">Try Again</a>
                     <a class="btn" href="/">Return Home</a>
                 </body>
