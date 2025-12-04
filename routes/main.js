@@ -37,7 +37,7 @@ router.get('/weather', function (req, res, next) {
       }
   });
 })
-
+ 
 //logout
 router.get('/logout', redirectLogin, (req,res) => {
     req.session.destroy(err => {
