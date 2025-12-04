@@ -65,7 +65,7 @@ router.get('/', (req, res) => {
 
       <h2>Check the Weather</h2>
       <form action="/weather" method="POST">
-        <input type="text" name="city" placeholder="Enter city (e.g. London)" required>
+        <input type="text" name="city" placeholder="Enter city" required>
         <button type="submit">Get Weather</button>
       </form>
 
