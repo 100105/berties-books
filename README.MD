@@ -58,6 +58,20 @@ there are also sanitised fields in the books route to stop XSS attacks
 
 access control added on /books/list, /books/addbook, /users/audit. there's log in needed for admin actions
 
+
+API DOCUMENTATION LAB 9:
+1. /api/books -> shows all books
+2. /api/books?search=animal -> shows all the books that have the word animal in the title
+3. /api/books?minprice=5&maxprice=10 -> shows all the books that are priced between 5£ and 10£
+4. /api/books?sort=price -> sorts the books in order of lowest to highest price
+5. /api/books?sort=name -> alphabetically sorts the boosk in order, a-z
+6. /api/books?sort=date -> sorts the books where latest added book is at the top
+7. /api/books?search=an&minprice=10&sort=name -> mixes all the sorting options together
+
+~ the api results are always returned in json format
+~ if there's no parameters, all the books added to the shop will be shown
+~ the api has no access controls so it's public
+
 ---
 ###### Author
 Sara Shah
