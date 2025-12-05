@@ -25,30 +25,112 @@
       font-size: 32px;
     }
 
-    h2 {
+    form {
       margin-top: 30px;
-      font-size: 24px;
-      color: #a07c68;
-      font-weight: 500;
     }
 
-    .nav-link {
-      display: inline-block;
-      margin-top: 10px;
-      background-color: #ffffff33;
-      padding: 8px 12px;
+    input[type="text"] {
+      padding: 8px;
+      width: 250px;
+      border: 1px solid #caa088;
       border-radius: 4px;
+    }
+
+    input[type="submit"] {
+      background-color: #d9b8a3;
       color: white;
-      font-weight: 600;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #c39b87;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 18px;
+      background-color: #e9d4c7;
+      color: white;
       text-decoration: none;
+      border-radius: 6px;
     }
 
-    .nav-link:hover {
-      background-color: #ffffff55;
+    .btn:hover {
+      background-color: #d9b8a3;
+      color: white;
     }
 
-    .home-link {
-      margin-top: 10px;
+    .message, .error {
+      margin-top: 25px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .error {
+      color: #b34040;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Bertie’s Bookshop - Weather</h1>
+
+    <% if (isLoggedIn) { %>
+      <a href="/logout" class="btn">Logout</a>
+    <% } %>
+    <p><a href="/" class="btn">Return to Home</a></p>
+  </header>
+
+  <h2>Check the weather</h2>
+
+  <form method="POST" action="/weather">
+    <input type="text" name="city" placeholder="Enter City" required>
+    <input type="submit" value="Get Weather">
+  </form>
+
+  <% if (error) { %>
+    <div class="error"><%= error %></div>
+  <% } %>
+
+  <% if (weather) { %>
+    <div class="message">
+      It is <%= weather.main.temp %>°C in <%= weather.name %>!<br>
+      The humidity now is <%= weather.main.humidity %>%
+    </div>
+  <% } %>
+
+</body>
+</html><!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Weather - Bertie’s Bookshop</title>
+  <style>
+    body {
+      font-family: "Poppins", Arial, sans-serif;
+      background-color: #f9f5f2;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: #4a3f35;
+    }
+
+    header {
+      background-color: #d9b8a3;
+      color: white;
+      padding: 25px;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 32px;
     }
 
     form {
@@ -60,60 +142,63 @@
       width: 250px;
       border: 1px solid #caa088;
       border-radius: 4px;
-      margin-right: 8px;
     }
 
     input[type="submit"] {
       background-color: #d9b8a3;
       color: white;
-      padding: 8px 16px;
+      padding: 10px 15px;
       border: none;
       border-radius: 4px;
       cursor: pointer;
-      font-weight: 600;
+      font-weight: bold;
     }
 
     input[type="submit"]:hover {
       background-color: #c39b87;
     }
 
-    .message {
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 18px;
+      background-color: #e9d4c7;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+    }
+
+    .btn:hover {
+      background-color: #d9b8a3;
+      color: white;
+    }
+
+    .message, .error {
       margin-top: 25px;
       font-size: 18px;
+      font-weight: 600;
     }
 
     .error {
-      margin-top: 25px;
-      font-size: 18px;
       color: #b34040;
-      font-weight: 600;
     }
   </style>
 </head>
 
 <body>
   <header>
-    <h1>Weather at Bertie’s Bookshop</h1>
+    <h1>Bertie’s Bookshop - Weather</h1>
 
     <% if (isLoggedIn) { %>
-      <a href="/logout" class="nav-link">Logout</a>
+      <a href="/logout" class="btn">Logout</a>
     <% } %>
-
-    <div class="home-link">
-      <a href="/" class="nav-link">Return to Home</a>
-    </div>
+    <p><a href="/" class="btn">Return to Home</a></p>
   </header>
 
   <h2>Check the weather</h2>
 
-  <form method="GET" action="/weather/now">
-    <input 
-      type="text" 
-      name="city" 
-      placeholder="Enter a city, e.g. London" 
-      value="<%= city || '' %>" 
-      required
-    >
+  <form method="POST" action="/weather">
+    <input type="text" name="city" placeholder="Enter City" required>
     <input type="submit" value="Get Weather">
   </form>
 
@@ -123,14 +208,118 @@
 
   <% if (weather) { %>
     <div class="message">
-      <p>
-        It is <strong><%= weather.main.temp %>°C</strong> in 
-        <strong><%= weather.name %></strong>!
-      </p>
-      <p>
-        The humidity now is: <strong><%= weather.main.humidity %>%</strong>
-      </p>
+      It is <%= weather.main.temp %>°C in <%= weather.name %>!<br>
+      The humidity now is <%= weather.main.humidity %>%
     </div>
   <% } %>
+
+</body>
+</html><!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Weather - Bertie’s Bookshop</title>
+  <style>
+    body {
+      font-family: "Poppins", Arial, sans-serif;
+      background-color: #f9f5f2;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      color: #4a3f35;
+    }
+
+    header {
+      background-color: #d9b8a3;
+      color: white;
+      padding: 25px;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 32px;
+    }
+
+    form {
+      margin-top: 30px;
+    }
+
+    input[type="text"] {
+      padding: 8px;
+      width: 250px;
+      border: 1px solid #caa088;
+      border-radius: 4px;
+    }
+
+    input[type="submit"] {
+      background-color: #d9b8a3;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #c39b87;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 18px;
+      background-color: #e9d4c7;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+    }
+
+    .btn:hover {
+      background-color: #d9b8a3;
+      color: white;
+    }
+
+    .message, .error {
+      margin-top: 25px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+    .error {
+      color: #b34040;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Bertie’s Bookshop - Weather</h1>
+
+    <% if (isLoggedIn) { %>
+      <a href="/logout" class="btn">Logout</a>
+    <% } %>
+    <p><a href="/" class="btn">Return to Home</a></p>
+  </header>
+
+  <h2>Check the weather</h2>
+
+  <form method="POST" action="/weather">
+    <input type="text" name="city" placeholder="Enter City" required>
+    <input type="submit" value="Get Weather">
+  </form>
+
+  <% if (error) { %>
+    <div class="error"><%= error %></div>
+  <% } %>
+
+  <% if (weather) { %>
+    <div class="message">
+      It is <%= weather.main.temp %>°C in <%= weather.name %>!<br>
+      The humidity now is <%= weather.main.humidity %>%
+    </div>
+  <% } %>
+
 </body>
 </html>

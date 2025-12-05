@@ -11,7 +11,7 @@ router.get('/', function (req, res) {
             <button type="submit">Get Weather</button>
         </form>
         <p><a href="/">Return Home</a></p>
-    `);
+     `);
 });
 
 // json
