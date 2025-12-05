@@ -14,12 +14,61 @@ const redirectLogin = (req, res, next) => {
 router.get('/search', function(req, res, next){
     res.render("search.ejs")
 });
-
+// search results 
 router.get('/search-result', function (req, res, next) {
-    console.log("QUERY RECEIVED:", req.query);
-    const keyword = req.query.keyword || "(no keyword entered)";
-    
-    res.render("search_result.ejs", { keyword: keyword });
+
+    let keyword = req.query.keyword;
+
+    if (!keyword || keyword.trim() === '') {
+        return res.send("No keyword entered!");
+    }
+
+    let sqlquery = "SELECT * FROM books WHERE name LIKE ?";
+    let searchTerm = "%" + keyword.trim() + "%";
+
+    db.query(sqlquery, [searchTerm], (err, result) => {
+        if (err) next(err);
+
+        if (result.length === 0) {
+            return res.send(`
+                <html>
+                <body style="font-family:Poppins;background:#f9f5f2;text-align:center;color:#4a3f35;">
+                    <h2>No results found for "${keyword}" </h2>
+                    <a href="/books/search" style="background:#d9b8a3;color:white;padding:10px 16px;border-radius:6px;text-decoration:none;">Search again</a>
+                    <br><br>
+                    <a href="/" style="background:#d9b8a3;color:white;padding:10px 16px;border-radius:6px;text-decoration:none;">Return Home</a>
+                </body>
+                </html>
+            `);
+        }
+
+        // if theres a match show them results
+        let list = result.map(book => `
+            <tr>
+              <td>${book.name}</td>
+              <td>£${Number(book.price).toFixed(2)}</td>
+            </tr>
+        `).join("");
+
+        res.send(`
+            <html>
+            <body style="font-family:Poppins;background:#f9f5f2;text-align:center;color:#4a3f35;">
+                <h2>Search results for "${keyword}" 🔍</h2>
+                <table style="margin:auto;border-collapse:collapse;">
+                    <tr>
+                        <th style="padding:10px;">Book Name</th>
+                        <th style="padding:10px;">Price</th>
+                    </tr>
+                    ${list}
+                </table>
+                <br>
+                <a href="/books/search" style="background:#d9b8a3;color:white;padding:10px 16px;border-radius:6px;text-decoration:none;">New Search</a>
+                <br><br>
+                <a href="/" style="background:#d9b8a3;color:white;padding:10px 16px;border-radius:6px;text-decoration:none;">Return Home</a>
+            </body>
+            </html>
+        `);
+    });
 });
 
 // Book list - PUBLIC (no login required)
