@@ -141,8 +141,7 @@ router.post('/', function (req, res, next) {
         else {
             return res.send(`
                 <html>
-                <body style="font-family:Poppins;text-align:center;background:#f9f5f2;padding-top:50px;color:#4a3f35;">
-                    <h2>No data found — try a different city</h2>
+                <body style="font-family: Arial, sans-serif; text-align:center; background:#f9f5f2; padding-top:50px; color:#4a3f35; line-height:1.6; font-size:18px;">                    <h2>No data found — try a different city</h2>
                     <a style="background:#d9b8a3;color:white;padding:10px 18px;border-radius:6px;text-decoration:none;" href="/weather">Try Again</a>
                     <br><br>
                     <a style="background:#d9b8a3;color:white;padding:10px 18px;border-radius:6px;text-decoration:none;" href="/">Return Home</a>
