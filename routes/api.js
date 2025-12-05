@@ -4,14 +4,22 @@ const router = express.Router();
 // /api/books
 router.get('/books', function (req, res, next) {
 
-    let sqlquery = "SELECT * FROM books";
+    let search = req.query.search; 
 
-    db.query(sqlquery, (err, result) => {
+    let sqlquery;
+
+    if (search && search.trim() !== '') {
+        search = '%' + search + '%'; 
+        sqlquery = "SELECT * FROM books WHERE name LIKE ?";
+    } else {
+        sqlquery = "SELECT * FROM books";
+    }
+
+    db.query(sqlquery, search ? [search] : [], (err, result) => {
         if (err) {
-            res.json(err);
-            return next(err);
+            return res.json({ error: "Database error", details: err });
         }
-        //json output 
+        //json results
         res.json(result); 
     });
 });
