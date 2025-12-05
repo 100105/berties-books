@@ -74,6 +74,10 @@ app.use('/users', usersRoutes)
 const booksRoutes = require('./routes/books')
 app.use('/books', booksRoutes)
 
+// Load api routes
+const apiRoutes = require('./routes/api');
+app.use('/api', apiRoutes);
+
 // Load weather routes
 const weatherRoutes = require('./routes/weather');
 app.use('/weather', weatherRoutes);
