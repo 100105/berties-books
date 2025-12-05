@@ -2,9 +2,8 @@ const express = require('express');
 const router = express.Router();
 const request = require('request');
 
-// -------------------------
-// Weather FORM (GET /weather)
-// -------------------------
+
+// weather form
 router.get('/', function (req, res) {
     res.send(`
         <!DOCTYPE html>
@@ -87,10 +86,8 @@ router.get('/', function (req, res) {
     `);
 });
 
-// -------------------------
-// JSON VERSION (GET /weather/now)
-// Lecturer requirement
-// -------------------------
+
+// json 
 router.get('/now', function (req, res, next) {
 
     var apiKey = process.env.WEATHER_API_KEY;
@@ -102,14 +99,12 @@ router.get('/now', function (req, res, next) {
         if (err) {
             next(err);
         } else {
-            res.send(body); // raw JSON output required for Task 3
+            res.send(body); 
         }
     });
 });
 
-// -------------------------
-// Human-friendly display of weather
-// -------------------------
+//designed outcone
 router.post('/', function (req, res, next) {
 
     var city = req.body.city;
@@ -122,24 +117,29 @@ router.post('/', function (req, res, next) {
 
         var weather = JSON.parse(body);
 
-        // Invalid / unknown city
+        // fake city
         if (weather.cod !== 200) {
             return res.send(`
                 <html>
                 <body style="font-family:Poppins;text-align:center;background:#f9f5f2;padding-top:50px;color:#4a3f35;">
                     <h2>City not found!</h2>
-                    <a style="background:#d9b8a3;color:white;padding:10px 18px;border-radius:6px;text-decoration:none;" href="/weather">Try Again</a>
-                    <a style="background:#d9b8a3;color:white;padding:10px 18px;border-radius:6px;text-decoration:none;" href="/">Return Home</a>
+                    <a style="background:#d9b8a3;color:white;padding:10px 18px;border-radius:6px;text-decoration:none;" href="/weather">search again</a>
+                    <a style="background:#d9b8a3;color:white;padding:10px 18px;border-radius:6px;text-decoration:none;" href="/">back to home</a>
                 </body>
                 </html>
             `);
         }
 
-        // EXACT coursework code required 👇
-        var wmsg = 'It is ' + weather.main.temp +
-            ' degrees in ' + weather.name +
+        // real city    
+        var wmsg =
+            'It is ' + weather.main.temp +
+            'degrees in ' + weather.name +
             '! <br> The humidity now is: ' +
-            weather.main.humidity;
+            weather.main.humidity +
+            '% <br> The wind speed is: ' +
+            weather.wind.speed + ' m/s';
+
+        
 
         res.send(`
             <html>
